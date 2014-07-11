@@ -2,12 +2,12 @@
 
 class BTCChinaException extends Exception
 {
-    private $method, $http_code;
-    function __construct($message, $method=NULL, $http_code=NULL)
+    private $method, $error_code;
+    function __construct($message, $method=NULL, $error_code=NULL)
     {
         parent::__construct($message);
         $this->method = $method;
-        $this->http_code = $http_code;
+        $this->error_code = $error_code;
     }
 
     public function getMethod()
@@ -15,9 +15,9 @@ class BTCChinaException extends Exception
         return $this->method;
     }
 
-    public function getHttpCode()
+    public function getErrorCode()
     {
-        return $this->http_code;
+        return $this->error_code;
     }
 }
 
