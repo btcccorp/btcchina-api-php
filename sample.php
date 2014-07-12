@@ -20,15 +20,15 @@ if($_POST)
 	}
 	catch(JsonRequestException $e)
 	{
-		echo print_r($e->getMessage() . $e->getMethod() . $e->getErrorCode());
+		echo var_dump($e->getMessage() . $e->getMethod() . $e->getErrorCode());
 	}
 	catch(ContentException $e)
 	{
-		echo print_r($e->getMessage() . $e->getMethod() . $e->getErrorCode());
+		echo var_dump($e->getMessage() . $e->getMethod() . $e->getErrorCode());
 	}
 	catch(ConnectionException $e)
 	{
-		echo print_r($e->getMessage() . $e->getMethod() . $e->getErrorCode());
+		echo var_dump($e->getMessage() . $e->getMethod() . $e->getErrorCode());
 	}
 	finally
 	{
