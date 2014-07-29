@@ -5,9 +5,9 @@ final Class BTCChinaAPI
     const URL = 'https://api.btcchina.com/api_trade_v1.php';
     private $accessKey, $secretKey, $ch;
 
-    private static $marketList = array('BTCCNY', 'LTCCNY', 'LTCBTC', 'ALL');
-    private static $currencyList = array('BTC', 'LTC');
-    private static $transactionList = array(
+    private static $marketType = array('BTCCNY', 'LTCCNY', 'LTCBTC', 'ALL');
+    private static $currencyType = array('BTC', 'LTC');
+    private static $transactionType= array(
 	    'all', 'fundbtc', 'withdrawbtc', 'fundmoney', 'withdrawmoney', 'refundmoney',
 		'buybtc', 'sellbtc', 'buyltc', 'sellltc', 'tradefee', 'rebate');
 
@@ -34,7 +34,7 @@ final Class BTCChinaAPI
 
     private static function is_market($var, $all=FALSE)
     {
-        if(array_search($var, self::$marketList, TRUE) === NULL)
+        if(array_search($var, self::$marketType, TRUE) === NULL)
             return FALSE;
         else if($var === 'ALL' && !$all )
             return FALSE;
@@ -44,7 +44,7 @@ final Class BTCChinaAPI
 
     private static function is_currency($var)
     {
-        if(array_search($var, self::$currencyList) === NULL)
+        if(array_search($var, self::$currencyType, TRUE) === NULL)
             return FALSE;
         else
             return TRUE;
@@ -52,7 +52,7 @@ final Class BTCChinaAPI
 
     private static function is_transaction($var)
     {
-        if(array_search($var, self::$transactionList, TRUE) === NULL)
+        if(array_search($var, self::$transactionType, TRUE) === NULL)
             return FALSE;
         else
             return TRUE;
@@ -194,7 +194,7 @@ final Class BTCChinaAPI
             throw new ContentException('currency: \'BTC\' or \'LTC\'', 'getDeposits');
         if(!is_bool($pendingonly))
             throw new ContentException('pendingonly: TRUE or FALSE', 'getDeposits');
-        return $this->DoMethod($method, array($method, $currency, $pendingonly));
+        return $this->DoMethod($method, array($currency, $pendingonly));
     }
 
     public function getWithdrawals($currency, $pendingonly=TRUE)
@@ -204,13 +204,13 @@ final Class BTCChinaAPI
             throw new ContentException('currency: \'BTC\' or \'LTC\'', 'getWithdrawals');
         if(!is_bool($pendingonly))
             throw new ContentException('pendingonly: TRUE or FALSE', 'getWithdrawals');
-        return $this->DoMethod($method, array($method, $currency, $pendingonly));
+        return $this->DoMethod($method, array($currency, $pendingonly));
     }
 
     public function getWithdrawal($withdrawID, $currency)
     {
         $method = 'getWithdrawal';
-        if($this->is_currency($currency))
+        if(!$this->is_currency($currency))
             throw new ContentException('currency: \'BTC\' or \'LTC\'', 'getWithdrawal');
         if(!$this->is_nnn($withdrawID))
             throw new ContentException('withdrawID is a numeric value.', 'getWithdrawal');
@@ -220,7 +220,7 @@ final Class BTCChinaAPI
     public function requestWithdrawal($currency, $amount)
     {
         $method = 'requestWithdrawal';
-        if($this->is_currency($currency))
+        if(!$this->is_currency($currency))
             throw new ContentException('currency: \'BTC\' or \'LTC\'', 'requestWithdrawal');
         if(!$this->is_nnn($amount))
             throw new ContentException('amount is a non-negative numeric value.', 'requestWithdrawal');
@@ -230,9 +230,9 @@ final Class BTCChinaAPI
     public function getOrder($orderID, $market)
     {
         $method = 'getOrder';
-        if($this->is_market($market, FALSE))
+        if(!$this->is_market($market, FALSE))
             throw new ContentException('market available: \'BTCCNY\', \'LTCCNY\' and \'LTCBTC\'.', 'getOrder');
-        if($this->is_nnn($orderID))
+        if(!$this->is_nnn($orderID))
             throw new ContentException('orderID is a non-negative numeric value.', 'getOrder');
         return $this->DoMethod($method, array($orderID));
     }
