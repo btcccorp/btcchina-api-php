@@ -27,7 +27,7 @@ $btcAPI = new BTCChinaAPI(access_key, secret_key);
 Call methods similiar to the format described in [API documentation](http://btcchina.org/api-trade-documentation-en).
 
 ```php
-$res = btcAPI->getAccountInfo();
+$res = $btcAPI->getAccountInfo();
 ```
 
 ##Returns
