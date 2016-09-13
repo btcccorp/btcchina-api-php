@@ -8,7 +8,7 @@ Firstly, download the library via:
 git clone https://github.com/BTCChina/btcchina-api-php
 ```
 
-Then, add the following line to your project:
+Then, add the following line to your project(please see the example in sample.php of btcchina-api-php project):
 ```php
 require_once('BTCChinaLibrary.php');
 ```
@@ -19,6 +19,8 @@ require_once('BTCChinaLibrary.php');
 Create Trade API keys at https://vip.btcchina.com/account/apikeys, and set proper permissions as indicated.
 
 Spawn BTCChinaAPI instance with access key and secret key mentioned above. Notice that these keys cannot be modified later.
+please create a file called account.config which should contains your apikeys (please see the example in btcchina-api-php project).
+The method below needs those parameters.
 
 ```php
 $btcAPI = new BTCChinaAPI(access_key, secret_key);
