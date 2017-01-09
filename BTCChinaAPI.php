@@ -5,7 +5,7 @@ final Class BTCChinaAPI
     const URL = 'https://api.btcchina.com/api_trade_v1.php';
     private $accessKey, $secretKey, $ch;
 
-    private static $marketType = array('BTCCNY', 'LTCCNY', 'LTCBTC', 'ALL');
+    private static $marketType = array('BTCCNY', 'LTCCNY', 'ALL');
     private static $currencyType = array('BTC', 'LTC');
     private static $transactionType= array(
 	    'all', 'fundbtc', 'withdrawbtc', 'fundmoney', 'withdrawmoney', 'refundmoney',
@@ -162,7 +162,7 @@ final Class BTCChinaAPI
             throw new ContentException('price should be either null or positive numeric.', 'placeOrder');
 
         if(!$this->is_market($market, FALSE))
-            throw new ContentException('Market must be \'BTCCNY\', \'LTCCNY\' or \'LTCBTC\'.', 'placeOrder');
+            throw new ContentException('Market must be \'BTCCNY\', \'LTCCNY\'.', 'placeOrder');
 
         return $this->DoMethod($method, array($price, $amount, $market));
     }
@@ -171,7 +171,7 @@ final Class BTCChinaAPI
     {
         $method = 'cancelOrder';
         if(!$this->is_market($market, FALSE))
-            throw new ContentException('Market must be \'BTCCNY\', \'LTCCNY\' or \'LTCBTC\'.', 'cancelOrder');
+            throw new ContentException('Market must be \'BTCCNY\', \'LTCCNY\'.', 'cancelOrder');
         if(!$this->is_nnn($orderID))
             throw new ContentException('orderID is a non-negative numeric value.', 'cancelOrder');
         return $this->DoMethod($method, array($orderID, $market));
@@ -183,7 +183,7 @@ final Class BTCChinaAPI
         if(!$this->is_nnn($limit))
             throw new ContentException('limit is a non-negative, numeric value.', 'getMarketDepth');
         if(!$this->is_market($market, TRUE))//'ALL' is ok.
-            throw new ContentException('market available: \'BTCCNY\', \'LTCCNY\' , \'LTCBTC\' and \'ALL\'', 'getMarketDepth');
+            throw new ContentException('market available: \'BTCCNY\', \'LTCCNY\' and \'ALL\'', 'getMarketDepth');
         return $this->DoMethod($method, array($limit, $market));
     }
 
@@ -231,7 +231,7 @@ final Class BTCChinaAPI
     {
         $method = 'getOrder';
         if(!$this->is_market($market, FALSE))
-            throw new ContentException('market available: \'BTCCNY\', \'LTCCNY\' and \'LTCBTC\'.', 'getOrder');
+            throw new ContentException('market available: \'BTCCNY\'and \'LTCBTC\'.', 'getOrder');
         if(!$this->is_nnn($orderID))
             throw new ContentException('orderID is a non-negative numeric value.', 'getOrder');
         return $this->DoMethod($method, array($orderID));
@@ -241,7 +241,7 @@ final Class BTCChinaAPI
     {
         $method = 'getOrders';
         if(!$this->is_market($market, TRUE))
-            throw new ContentException('market available: \'BTCCNY\', \'LTCCNY\' , \'LTCBTC\' and \'ALL\'', 'getOrders');
+            throw new ContentException('market available: \'BTCCNY\', \'LTCCNY\' and \'ALL\'', 'getOrders');
         if(!$this->is_nnn($limit))
             throw new ContentException('limit is a non-negative numeric value.', 'getOrders');
         if(!$this->is_nnn($offset))
