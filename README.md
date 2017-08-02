@@ -48,7 +48,7 @@ Aside from standard _getMessage()_, two more functions are added:
 ##Examples
 ###Get user information
 ```php
-$res = btcAPI->getAccountInfo();
+$res = $btcAPI->getAccountInfo();
 ```
 
 _Result_:
@@ -56,7 +56,7 @@ JSON Objects of [profile](http://btcchina.org/api-trade-documentation-en#profile
 
 ###Place order
 ```php
-$ res = btcAPI->placeOrder($price = NULL, $amount, $market = 'BTCCNY');
+$res = $btcAPI->placeOrder($price = NULL, $amount, $market = 'BTCCNY');
 ```
 
 Market type determines the precision of price and amount. See [FAQ](http://btcchina.org/api-trade-documentation-en#faq) No.6 for details.
@@ -71,7 +71,7 @@ orderID on success. [Invalid amount or invalid price](http://btcchina.org/api-tr
 
 ###Cancel order
 ```php
-$res = btcAPI->cancelOrder($orderID, $market = 'BTCCNY');
+$res = $btcAPI->cancelOrder($orderID, $market = 'BTCCNY');
 ```
 
 _Parameters:_
@@ -84,7 +84,7 @@ TRUE if successful, otherwise FALSE.
 
 ###Get Market Depth
 ```php
-$res = btcAPI->getMarketDepth($limit = 10, $market = 'BTCCNY');
+$res = $btcAPI->getMarketDepth($limit = 10, $market = 'BTCCNY');
 ```
 
 Get the complete market depth.
@@ -98,7 +98,7 @@ _Result:_
 
 ###Get Deposits
 ```php
-$res = btcAPI->getDeposits($currency, $pendingonly = true);
+$res = $btcAPI->getDeposits($currency, $pendingonly = true);
 ```
 
 Get all user deposits.
@@ -113,7 +113,7 @@ Array of [deposit](http://btcchina.org/api-trade-documentation-en#deposit) JSON 
 
 ###Get Withdrawals
 ```php
-$res = btcAPI->getWithdrawals($currency, $pendingonly = true);
+$res = $btcAPI->getWithdrawals($currency, $pendingonly = true);
 ```
 
 Get all user withdrawals.
@@ -128,7 +128,7 @@ Array of [withdrawal](http://btcchina.org/api-trade-documentation-en#withdrawal)
 
 ###Get single withdrawal status
 ```php
-$res = btcAPI->getWithdrawal($withdrawalID, $currency = 'BTC');
+$res = $btcAPI->getWithdrawal($withdrawalID, $currency = 'BTC');
 ```
 
 _Parameters:_
@@ -141,7 +141,7 @@ _Result:_
 
 ###Request a withdrawal
 ```php
-$res = btcAPI->requestWithdrawal($currency, $amount);
+$res = $btcAPI->requestWithdrawal($currency, $amount);
 ```
 
 Make a withdrawal request. BTC withdrawals will pick last used withdrawal address from user profile.
@@ -157,7 +157,7 @@ Notice that the return format of withdrawalID is different from that of orderID.
 
 ###Get order status
 ```php
-$res = btcAPI->getOrder($orderID, $market = 'BTCCNY');
+$res = $btcAPI->getOrder($orderID, $market = 'BTCCNY');
 ```
 
 _Parameters:_
@@ -170,7 +170,7 @@ _Result:_
 
 ###Get all order status
 ```php
-$res = btcAPI->getOrders($openonly = true, $market = 'BTCCNY', $limit = 1000, $offset = 0);
+$res = $btcAPI->getOrders($openonly = true, $market = 'BTCCNY', $limit = 1000, $offset = 0);
 ```
 
 _Parameters:_
@@ -185,7 +185,7 @@ Array of [order](http://btcchina.org/api-trade-documentation-en#order) JSON obje
 
 ###Get transaction log
 ```php
-$res = btcAPI->getTransactions($transaction = 'all', $limit = 10, $offset = 0);
+$res = $btcAPI->getTransactions($transaction = 'all', $limit = 10, $offset = 0);
 ```
 
 Notice that prices returned by this method may differ from placeOrder as it is the price get procceeded.
