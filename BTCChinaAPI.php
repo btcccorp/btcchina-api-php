@@ -22,7 +22,7 @@ final Class BTCChinaAPI
     {
         curl_close($this->ch);
     }
-	
+
     //test if a variable is a non-negative number.
     private static function is_nnn($var)
     {
@@ -227,14 +227,14 @@ final Class BTCChinaAPI
         return $this->DoMethod($method, array($currency, $amount));
     }
 
-    public function getOrder($orderID, $market)
+    public function getOrder($orderID, $market = 'BTCCNY')
     {
         $method = 'getOrder';
         if(!$this->is_market($market, FALSE))
             throw new ContentException('market available: \'BTCCNY\'and \'LTCBTC\'.', 'getOrder');
         if(!$this->is_nnn($orderID))
             throw new ContentException('orderID is a non-negative numeric value.', 'getOrder');
-        return $this->DoMethod($method, array($orderID));
+        return $this->DoMethod($method, array($orderID, $market));
     }
 
     public function getOrders($openonly = TRUE, $market = 'BTCCNY', $limit = 1000, $offset = 0)
